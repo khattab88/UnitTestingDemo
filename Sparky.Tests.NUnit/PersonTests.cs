@@ -10,12 +10,18 @@ namespace Sparky.Tests.NUnit
     [TestFixture]
     public class PersonTests
     {
+        private Person _person;
+
+        [SetUp]
+        public void Setup()
+        {
+            _person = new Person();
+        }
+
         [Test]
         public void Greet_InputFirstAndLastNames_ReturnsFullNameGreeting()
         {
-            Person person = new();
-
-            var result = person.Greet("John", "Doe");
+            var result = _person.Greet("John", "Doe");
 
             // Assert.AreEqual("Hello, John Doe", result);
             Assert.That(result, Is.EqualTo("Hello, John Doe."));
@@ -29,16 +35,14 @@ namespace Sparky.Tests.NUnit
         [Test]
         public void Greeting_GreetNotCalled_ReturnsNull()
         {
-            Person person = new();
-            Assert.IsNull(person.Greeting);
+            Assert.IsNull(_person.Greeting);
         }
 
         [Test]
         public void Greeting_GreetCalled_ReturnsGreeting()
         {
-            Person person = new();
-            person.Greet("John", "Doe");
-            Assert.IsNotNull(person.Greeting);
+            _person.Greet("John", "Doe");
+            Assert.IsNotNull(_person.Greeting);
         }
     }
 }
