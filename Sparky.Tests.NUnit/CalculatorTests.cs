@@ -56,5 +56,21 @@ namespace Sparky.Tests.NUnit
 
             return result;
         }
+
+        [Test]
+        [TestCase(5.4, 10.5)] //15.9
+        [TestCase(5.43, 10.53)] //15.93
+        [TestCase(5.49, 10.59)] //16.08
+        public void Add_InputTwoDoubles_ReturnsCorrectAddition(double a, double b)
+        {
+            // Arrange
+            Calculator calculator = new();
+
+            // Act
+            var result = calculator.AddDouble(a,b);
+
+            // Assert
+            Assert.AreEqual(15.9, result, 1);
+        }
     }
 }

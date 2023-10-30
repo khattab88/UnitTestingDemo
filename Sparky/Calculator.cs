@@ -7,6 +7,11 @@
             return a + b;
         }
 
+        public double AddDouble(double a, double b)
+        {
+            return a + b;
+        }
+
         public bool IsOdd(int a)
         {
             return a % 2 != 0;
