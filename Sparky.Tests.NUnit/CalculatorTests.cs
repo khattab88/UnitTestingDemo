@@ -11,14 +11,15 @@ namespace Sparky.Tests.NUnit
     [TestFixture]
     public class CalculatorTests
     {
+        private Calculator _calculator = new();
+
         [Test]
         public void Add_InputTwoInt_ReturnsCorrectAddition()
         {
             // Arrange
-            Calculator calculator = new();
 
             // Act
-            var result = calculator.Add(20, 30);
+            var result = _calculator.Add(20, 30);
 
             // Assert
             Assert.AreEqual(50, result);
@@ -30,8 +31,7 @@ namespace Sparky.Tests.NUnit
         [TestCase(57)]
         public void IsOdd_OddNumber_ReturnsTrue(int a)
         {
-            Calculator calc = new();
-            bool result = calc.IsOdd(a);
+            bool result = _calculator.IsOdd(a);
 
             // Assert.That(result, Is.EqualTo(true));
             Assert.IsTrue(result);
@@ -40,8 +40,7 @@ namespace Sparky.Tests.NUnit
         [Test]
         public void IsOddNumber_EvenNumber_ReturnsTrue()
         {
-            Calculator calc = new();
-            bool result = calc.IsOdd(4);
+            bool result = _calculator.IsOdd(4);
             Assert.IsFalse(result);
         }
 
@@ -50,9 +49,7 @@ namespace Sparky.Tests.NUnit
         [TestCase(11, ExpectedResult = true)]
         public bool IsOdd_InputNumber_ReturnsTrueIfOdd(int a)
         {
-            Calculator calc = new();
-
-            bool result = calc.IsOdd(a);
+            bool result = _calculator.IsOdd(a);
 
             return result;
         }
@@ -64,13 +61,22 @@ namespace Sparky.Tests.NUnit
         public void Add_InputTwoDoubles_ReturnsCorrectAddition(double a, double b)
         {
             // Arrange
-            Calculator calculator = new();
 
             // Act
-            var result = calculator.AddDouble(a,b);
+            var result = _calculator.AddDouble(a,b);
 
             // Assert
             Assert.AreEqual(15.9, result, 1);
+        }
+
+        [Test]
+        public void GetOddNumbersRange_InputMinAndMax_ReturnsValidOddNumbersRange()
+        {
+            List<int> expected = new() { 1,3,5,7,9 };
+
+            List<int> result = _calculator.GetOddNumbersRange(1, 10);
+
+            Assert.That(result, Is.EquivalentTo(expected));
         }
     }
 }
