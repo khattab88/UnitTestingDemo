@@ -25,10 +25,13 @@ namespace Sparky.Tests.NUnit
         }
 
         [Test]
-        public void IsOdd_OddNumber_ReturnsTrue()
+        [TestCase(11)]
+        [TestCase(23)]
+        [TestCase(57)]
+        public void IsOdd_OddNumber_ReturnsTrue(int a)
         {
             Calculator calc = new();
-            bool result = calc.IsOdd(3);
+            bool result = calc.IsOdd(a);
 
             // Assert.That(result, Is.EqualTo(true));
             Assert.IsTrue(result);
