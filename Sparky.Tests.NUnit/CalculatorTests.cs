@@ -44,5 +44,17 @@ namespace Sparky.Tests.NUnit
             bool result = calc.IsOdd(4);
             Assert.IsFalse(result);
         }
+
+        [Test]
+        [TestCase(10, ExpectedResult = false)]
+        [TestCase(11, ExpectedResult = true)]
+        public bool IsOdd_InputNumber_ReturnsTrueIfOdd(int a)
+        {
+            Calculator calc = new();
+
+            bool result = calc.IsOdd(a);
+
+            return result;
+        }
     }
 }
