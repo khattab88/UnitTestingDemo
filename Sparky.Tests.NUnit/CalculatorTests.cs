@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,24 @@ namespace Sparky.Tests.NUnit
 
             // Assert
             Assert.AreEqual(50, result);
+        }
+
+        [Test]
+        public void IsOdd_OddNumber_ReturnsTrue()
+        {
+            Calculator calc = new();
+            bool result = calc.IsOdd(3);
+
+            // Assert.That(result, Is.EqualTo(true));
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsOddNumber_EvenNumber_ReturnsTrue()
+        {
+            Calculator calc = new();
+            bool result = calc.IsOdd(4);
+            Assert.IsFalse(result);
         }
     }
 }

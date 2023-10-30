@@ -6,5 +6,10 @@
         {
             return a + b;
         }
+
+        public bool IsOdd(int a)
+        {
+            return a % 2 != 0;
+        }
     }
 }
