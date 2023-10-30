@@ -8,9 +8,12 @@ namespace Sparky
 {
     public class Person
     {
+        public string Greeting { get; set; }
+
         public string Greet(string firstName, string lastName)
         {
-            return $"Hello, {firstName} {lastName}.";
+            this.Greeting = $"Hello, {firstName} {lastName}.";
+            return this.Greeting;
         }
     }
 }

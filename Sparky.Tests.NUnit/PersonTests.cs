@@ -25,5 +25,20 @@ namespace Sparky.Tests.NUnit
             Assert.That(result, Does.EndWith("."));
             Assert.That(result, Does.Match("Hello, [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+."));
         }
+
+        [Test]
+        public void Greeting_GreetNotCalled_ReturnsNull()
+        {
+            Person person = new();
+            Assert.IsNull(person.Greeting);
+        }
+
+        [Test]
+        public void Greeting_GreetCalled_ReturnsGreeting()
+        {
+            Person person = new();
+            person.Greet("John", "Doe");
+            Assert.IsNotNull(person.Greeting);
+        }
     }
 }
