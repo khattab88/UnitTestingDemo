@@ -48,6 +48,27 @@ namespace Sparky.Tests.NUnit
         }
 
         [Test]
+        public void Greeting_GreetWithoutLastName_ReturnsNotNull()
+        {
+            _customer.Greet("Ben", "");
+
+            Assert.IsNotNull(_customer.Greeting);
+            Assert.IsFalse(string.IsNullOrEmpty(_customer.Greeting));
+        }
+
+        [Test]
+        public void Greet_EmptyFirstName_ThrowsArgumentException()
+        {
+            var exceptionDetails = Assert.Throws<ArgumentException>(
+                () => _customer.Greet("", "Stark"));
+
+            // Assert.AreEqual("First name cannot be null!", exceptionDetails?.Message);
+
+            Assert.That(() => { _customer.Greet("", "Stark"); }, 
+                Throws.ArgumentException.With.Message.EqualTo("First name cannot be null!"));
+        }
+
+        [Test]
         public void CheckDiscount_DefaultCustomer_ReturnsDiscountInRange()
         {
             int result = _customer.Discount;

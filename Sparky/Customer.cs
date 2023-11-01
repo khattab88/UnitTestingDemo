@@ -14,6 +14,11 @@ namespace Sparky
 
         public string Greet(string firstName, string lastName)
         {
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                throw new ArgumentException("First name cannot be null!");
+            }
+
             this.Discount = 20;
 
             this.Greeting = $"Hello, {firstName} {lastName}.";
