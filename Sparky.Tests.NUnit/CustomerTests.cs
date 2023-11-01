@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 namespace Sparky.Tests.NUnit
 {
     [TestFixture]
-    public class PersonTests
+    public class CustomerTests
     {
-        private Person _person;
+        private Customer _customer;
 
         [SetUp]
         public void Setup()
         {
-            _person = new Person();
+            _customer = new Customer();
         }
 
         [Test]
         public void Greet_InputFirstAndLastNames_ReturnsFullNameGreeting()
         {
-            var result = _person.Greet("John", "Doe");
+            var result = _customer.Greet("John", "Doe");
 
             // Assert.AreEqual("Hello, John Doe", result);
             Assert.That(result, Is.EqualTo("Hello, John Doe."));
@@ -35,14 +35,21 @@ namespace Sparky.Tests.NUnit
         [Test]
         public void Greeting_GreetNotCalled_ReturnsNull()
         {
-            Assert.IsNull(_person.Greeting);
+            Assert.IsNull(_customer.Greeting);
         }
 
         [Test]
         public void Greeting_GreetCalled_ReturnsGreeting()
         {
-            _person.Greet("John", "Doe");
-            Assert.IsNotNull(_person.Greeting);
+            _customer.Greet("John", "Doe");
+            Assert.IsNotNull(_customer.Greeting);
+        }
+
+        [Test]
+        public void CheckDiscount_DefaultCustomer_ReturnsDiscountInRange()
+        {
+            int result = _customer.Discount;
+            Assert.That(result, Is.InRange(10,25));
         }
     }
 }
