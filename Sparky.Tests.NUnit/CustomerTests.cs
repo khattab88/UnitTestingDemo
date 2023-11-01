@@ -23,13 +23,15 @@ namespace Sparky.Tests.NUnit
         {
             var result = _customer.Greet("John", "Doe");
 
-            // Assert.AreEqual("Hello, John Doe", result);
-            Assert.That(result, Is.EqualTo("Hello, John Doe."));
-            Assert.That(result, Does.Contain(","));
-            Assert.That(result, Does.Contain("john doe").IgnoreCase);
-            Assert.That(result, Does.StartWith("Hello"));
-            Assert.That(result, Does.EndWith("."));
-            Assert.That(result, Does.Match("Hello, [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+."));
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.EqualTo("Hello, John Doe."));
+                Assert.That(result, Does.Contain(","));
+                Assert.That(result, Does.Contain("john doe").IgnoreCase);
+                Assert.That(result, Does.StartWith("Hello"));
+                Assert.That(result, Does.EndWith("."));
+                Assert.That(result, Does.Match("Hello, [A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+."));
+            });
         }
 
         [Test]
