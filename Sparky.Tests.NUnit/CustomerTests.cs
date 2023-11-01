@@ -59,10 +59,12 @@ namespace Sparky.Tests.NUnit
         [Test]
         public void Greet_EmptyFirstName_ThrowsArgumentException()
         {
-            var exceptionDetails = Assert.Throws<ArgumentException>(
-                () => _customer.Greet("", "Stark"));
+            //var exceptionDetails = Assert.Throws<ArgumentException>(
+            //    () => _customer.Greet("", "Stark"));
 
             // Assert.AreEqual("First name cannot be null!", exceptionDetails?.Message);
+
+            Assert.Throws<ArgumentException>(() => _customer.Greet("", "Stark"));
 
             Assert.That(() => { _customer.Greet("", "Stark"); }, 
                 Throws.ArgumentException.With.Message.EqualTo("First name cannot be null!"));
