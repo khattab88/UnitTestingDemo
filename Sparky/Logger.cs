@@ -18,4 +18,12 @@ namespace Sparky
             Console.WriteLine(message);
         }
     }
+
+    public class FakeLogger : ILogger
+    {
+        public void Log(string message)
+        {
+            // NULL Object
+        }
+    }
 }

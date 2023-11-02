@@ -15,7 +15,7 @@ namespace Sparky.Tests.NUnit
         [SetUp]
         public void SetUp() 
         {
-            _account = new (new Logger());
+            _account = new(new FakeLogger());
         }
 
         [Test]
