@@ -11,6 +11,7 @@ namespace Sparky
         void Log(string message);
         bool LogToDb(string message);
         bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal);
+        string LogWithReturnString(string message);
     }
 
     public class Logger : ILogger
@@ -37,23 +38,34 @@ namespace Sparky
             Console.WriteLine($"Log to Db: {message}");
             return true;
         }
-    }
 
-    public class FakeLogger : ILogger
-    {
-        public void Log(string message)
+        public string LogWithReturnString(string message)
         {
-            // NULL Object
-        }
-
-        public bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool LogToDb(string message)
-        {
-            throw new NotImplementedException();
+            Console.WriteLine(message);
+            return message.ToLower();
         }
     }
+
+    //public class FakeLogger : ILogger
+    //{
+    //    public void Log(string message)
+    //    {
+    //        // NULL Object
+    //    }
+
+    //    public bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public bool LogToDb(string message)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public string LogWithReturnString(string message)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }

@@ -18,6 +18,17 @@ namespace Sparky.Tests.NUnit
         {
         }
 
+        //[Test]
+        //public void Deposit_CreateAccountWithFakeLoggerAdd100_ReturnsTrue()
+        //{
+        //    BankAccount account = new(new FakeLogger());
+
+        //    bool result = account.Deposit(100);
+
+        //    Assert.IsTrue(result);
+        //    Assert.That(account.GetBalance(), Is.EqualTo(100));
+        //}
+
         [Test]
         public void Deposit_Add100_ReturnsTrue()
         {
@@ -25,17 +36,6 @@ namespace Sparky.Tests.NUnit
             mockLogger.Setup(x => x.Log("Deposit invoked!"));
 
             BankAccount account = new(mockLogger.Object);
-
-            bool result = account.Deposit(100);
-
-            Assert.IsTrue(result);
-            Assert.That(account.GetBalance(), Is.EqualTo(100));
-        }
-
-        [Test]
-        public void Deposit_CreateAccountWithFakeLoggerAdd100_ReturnsTrue()
-        {
-            BankAccount account = new(new FakeLogger());
 
             bool result = account.Deposit(100);
 
@@ -67,6 +67,8 @@ namespace Sparky.Tests.NUnit
             var mockLogger = new Mock<ILogger>();
             mockLogger.Setup(m => m.LogToDb(It.IsAny<string>())).Returns(true);
             mockLogger.Setup(m => m.LogBalanceAfterWithdrawal(It.Is<int>(x => x > 0))).Returns(true);
+            // mockLogger.Setup(m => m.LogBalanceAfterWithdrawal(It.Is<int>(x => x < 0))).Returns(false);
+            // mockLogger.Setup(m => m.LogBalanceAfterWithdrawal(It.IsInRange<int>(int.MinValue, -1, Moq.Range.Inclusive))).Returns(false);
 
             BankAccount account = new(mockLogger.Object);
             account.Deposit(balance);
@@ -74,6 +76,18 @@ namespace Sparky.Tests.NUnit
             bool result = account.Withdraw(amount);
 
             Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void DummyLog_WithLogWithReturnString_ReturnsTrue()
+        {
+            string expected = "hello";
+
+            var mockLogger = new Mock<ILogger>();
+            mockLogger.Setup(m => m.LogWithReturnString(It.IsAny<string>()))
+                .Returns((string str) => str.ToLower());
+
+            Assert.That(mockLogger.Object.LogWithReturnString("Hello"), Is.EqualTo(expected));
         }
     }
 }
