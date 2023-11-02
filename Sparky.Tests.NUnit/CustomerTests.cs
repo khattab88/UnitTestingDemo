@@ -76,5 +76,21 @@ namespace Sparky.Tests.NUnit
             int result = _customer.Discount;
             Assert.That(result, Is.InRange(10,25));
         }
+
+        [Test]
+        public void GetCustomerDetails_CreateCustomerWithOrderTotalLessThan100_ReturnsBasicCustomer()
+        {
+            _customer.OrderTotal = 10;
+            CustomerType result = _customer.GetCustomerDetails();
+            Assert.That(result, Is.TypeOf<BasicCustomer>());
+        }
+
+        [Test]
+        public void GetCustomerDetails_CreateCustomerWithOrderTotalMoreThan100_ReturnsPremiumCustomer()
+        {
+            _customer.OrderTotal = 200;
+            CustomerType result = _customer.GetCustomerDetails();
+            Assert.That(result, Is.TypeOf<PremiumCustomer>());
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace Sparky
     {
         public int Discount = 15;
 
+        public int OrderTotal { get; set; }
         public string Greeting { get; set; }
 
         public string Greet(string firstName, string lastName)
@@ -24,5 +25,19 @@ namespace Sparky
             this.Greeting = $"Hello, {firstName} {lastName}.";
             return this.Greeting;
         }
+
+        public CustomerType GetCustomerDetails()
+        {
+            if(OrderTotal < 100)
+            {
+                return new BasicCustomer();
+            }
+
+            return new PremiumCustomer();
+        }
     }
+
+    public abstract class CustomerType { }
+    public class BasicCustomer : CustomerType { }
+    public class PremiumCustomer : CustomerType { }
 }
