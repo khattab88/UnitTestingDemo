@@ -8,22 +8,28 @@ namespace Sparky
 {
     public class BankAccount
     {
-        private int _balance { get; set; }
+        private int _balance;
+        private readonly ILogger _logger;
 
-        public BankAccount()
+        public BankAccount(ILogger logger)
         {
             _balance = 0;
+            _logger = logger;
         }
 
         public bool Deposit(int amount)
         {
+            _logger.Log("Deposit invoked!");
+
             _balance += amount;
             return true;
         }
 
         public bool Withdraw(int amount)
         {
-            if(amount <= _balance)
+            _logger.Log("Withdraw invoked!");
+
+            if (amount <= _balance)
             {
                 _balance -= amount;
                 return true;
