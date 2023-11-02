@@ -27,15 +27,15 @@ namespace Sparky
 
         public bool Withdraw(int amount)
         {
-            _logger.Log("Withdraw invoked!");
-
             if (amount <= _balance)
             {
+                _logger.LogToDb("Withdrawl Amount: " + amount.ToString());
+
                 _balance -= amount;
-                return true;
+                return _logger.LogBalanceAfterWithdrawal(_balance);
             }
 
-            return false;
+            return _logger.LogBalanceAfterWithdrawal(_balance - amount);
         }
 
         public int GetBalance() { return _balance; }

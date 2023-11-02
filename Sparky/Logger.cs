@@ -9,6 +9,8 @@ namespace Sparky
     public interface ILogger
     {
         void Log(string message);
+        bool LogToDb(string message);
+        bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal);
     }
 
     public class Logger : ILogger
@@ -17,6 +19,24 @@ namespace Sparky
         {
             Console.WriteLine(message);
         }
+
+        public bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal)
+        {
+            if(balanceAfterWithdrawal >= 0) 
+            {
+                Console.WriteLine("Withdrawal: Success");
+                return true;
+            }
+
+            Console.WriteLine("Withdrawal: Failed");
+            return false;
+        }
+
+        public bool LogToDb(string message)
+        {
+            Console.WriteLine($"Log to Db: {message}");
+            return true;
+        }
     }
 
     public class FakeLogger : ILogger
@@ -24,6 +44,16 @@ namespace Sparky
         public void Log(string message)
         {
             // NULL Object
+        }
+
+        public bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool LogToDb(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }
