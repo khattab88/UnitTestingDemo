@@ -45,5 +45,20 @@ namespace Sparky.Tests.NUnit
             Assert.That(mockLogger.Object.LogSeverity, Is.EqualTo(10));
             Assert.That(mockLogger.Object.LogType, Is.EqualTo("INFO"));
         }
+
+        [Test]
+        public void Log_MockingCallbacks()
+        {
+            string logTemp = "Hello, ";
+
+            var mockLogger = new Mock<ILogger>();
+            mockLogger.Setup(m => m.LogToDb(It.IsAny<string>()))
+                .Returns(true)
+                .Callback((string str) => logTemp += str);
+
+            mockLogger.Object.LogToDb("Ben");
+
+            Assert.That(logTemp, Is.EqualTo("Hello, Ben"));
+        }
     }
 }
