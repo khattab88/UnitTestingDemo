@@ -8,6 +8,9 @@ namespace Sparky
 {
     public interface ILogger
     {
+        public int LogSeverity { get; set; }
+        public string LogType { get; set; }
+
         void Log(string message);
         bool LogToDb(string message);
         bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal);
@@ -17,6 +20,9 @@ namespace Sparky
 
     public class Logger : ILogger
     {
+        public int LogSeverity { get;  set; }
+        public string LogType { get; set; }
+
         public void Log(string message)
         {
             Console.WriteLine(message);
