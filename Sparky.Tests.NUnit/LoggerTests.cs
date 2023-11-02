@@ -60,5 +60,18 @@ namespace Sparky.Tests.NUnit
 
             Assert.That(logTemp, Is.EqualTo("Hello, Ben"));
         }
+
+        [Test]
+        public void Log_VerifyInvocations()
+        {
+            var mockLogger = new Mock<ILogger>();
+            var account = new BankAccount(mockLogger.Object);
+
+            account.Deposit(100);
+
+            // verification
+            mockLogger.Verify(m => m.Log(It.IsAny<string>()), Times.Exactly(2));
+            mockLogger.VerifySet(m => m.LogSeverity = 101, Times.Once);
+        }
     }
 }
