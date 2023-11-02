@@ -12,6 +12,7 @@ namespace Sparky
         bool LogToDb(string message);
         bool LogBalanceAfterWithdrawal(int balanceAfterWithdrawal);
         string LogWithReturnString(string message);
+        bool LogWithOutputResult(string message, out string outputResult);
     }
 
     public class Logger : ILogger
@@ -36,6 +37,12 @@ namespace Sparky
         public bool LogToDb(string message)
         {
             Console.WriteLine($"Log to Db: {message}");
+            return true;
+        }
+
+        public bool LogWithOutputResult(string message, out string outputResult)
+        {
+            outputResult = "Log: " + message;
             return true;
         }
 

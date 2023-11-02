@@ -89,5 +89,17 @@ namespace Sparky.Tests.NUnit
 
             Assert.That(mockLogger.Object.LogWithReturnString("Hello"), Is.EqualTo(expected));
         }
+
+        [Test]
+        public void DummyLog_WithLogReturnsOutputResult_ReturnsTrue()
+        {
+            var logMock = new Mock<ILogger>();
+            string desiredOutput = "hello";
+
+            logMock.Setup(u => u.LogWithOutputResult(It.IsAny<string>(), out desiredOutput)).Returns(true);
+            string result = "";
+            Assert.IsTrue(logMock.Object.LogWithOutputResult("Ben", out result));
+            Assert.That(result, Is.EqualTo(desiredOutput));
+        }
     }
 }
