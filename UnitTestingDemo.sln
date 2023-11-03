@@ -11,6 +11,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sparky.Tests.NUnit", "Spark
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparky.Tests.XUnit", "Sparky.Tests.XUnit\Sparky.Tests.XUnit.csproj", "{4E1377F3-370E-49A0-8D53-A533A1BB32F5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basic", "Basic", "{2DEA0C8D-B07E-484F-A7D1-7819ADC246DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bongo.Core", "Bongo_InitialSetup (.NET 6)\Bongo.Core\Bongo.Core.csproj", "{A681BF2E-354F-41B7-9C60-A24CE0099DF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bongo.Models", "Bongo_InitialSetup (.NET 6)\Bongo.Models\Bongo.Models.csproj", "{4D3C0E15-E03B-4448-90D1-FC7C5BED0629}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bongo.DataAccess", "Bongo_InitialSetup (.NET 6)\Bongo.DataAccess\Bongo.DataAccess.csproj", "{C214DED7-15EF-4068-9B38-1CAC5D51D441}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bongo.Web", "Bongo_InitialSetup (.NET 6)\Bongo.Web\Bongo.Web.csproj", "{4FCB4483-1B08-4B85-9290-B2BF864296F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +43,31 @@ Global
 		{4E1377F3-370E-49A0-8D53-A533A1BB32F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E1377F3-370E-49A0-8D53-A533A1BB32F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E1377F3-370E-49A0-8D53-A533A1BB32F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A681BF2E-354F-41B7-9C60-A24CE0099DF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A681BF2E-354F-41B7-9C60-A24CE0099DF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A681BF2E-354F-41B7-9C60-A24CE0099DF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A681BF2E-354F-41B7-9C60-A24CE0099DF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3C0E15-E03B-4448-90D1-FC7C5BED0629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3C0E15-E03B-4448-90D1-FC7C5BED0629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3C0E15-E03B-4448-90D1-FC7C5BED0629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3C0E15-E03B-4448-90D1-FC7C5BED0629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C214DED7-15EF-4068-9B38-1CAC5D51D441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C214DED7-15EF-4068-9B38-1CAC5D51D441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C214DED7-15EF-4068-9B38-1CAC5D51D441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C214DED7-15EF-4068-9B38-1CAC5D51D441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FCB4483-1B08-4B85-9290-B2BF864296F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FCB4483-1B08-4B85-9290-B2BF864296F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FCB4483-1B08-4B85-9290-B2BF864296F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FCB4483-1B08-4B85-9290-B2BF864296F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7126773-31D3-4071-8984-E384C343CAB7} = {2DEA0C8D-B07E-484F-A7D1-7819ADC246DF}
+		{03EF25C8-7EC8-4D07-8125-B9368EC6C245} = {2DEA0C8D-B07E-484F-A7D1-7819ADC246DF}
+		{ED05A855-6CE7-449B-BD94-15E90210BBC2} = {2DEA0C8D-B07E-484F-A7D1-7819ADC246DF}
+		{4E1377F3-370E-49A0-8D53-A533A1BB32F5} = {2DEA0C8D-B07E-484F-A7D1-7819ADC246DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {870221D0-44EA-4A0B-ADB6-CE483B406777}
