@@ -1,19 +1,18 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
-namespace Sparky.Tests.NUnit
+namespace Sparky.Tests.XUnit
 {
-    [TestFixture]
     public class CalculatorTests
     {
         private Calculator _calculator = new();
 
-        [Test]
+        [Fact]
         public void Add_InputTwoInt_ReturnsCorrectAddition()
         {
             // Arrange
@@ -22,42 +21,42 @@ namespace Sparky.Tests.NUnit
             var result = _calculator.Add(20, 30);
 
             // Assert
-            Assert.AreEqual(50, result);
+            Assert.Equal(50, result);
         }
 
-        [Test]
-        [TestCase(11)]
-        [TestCase(23)]
-        [TestCase(57)]
+        [Theory]
+        [InlineData(11)]
+        [InlineData(23)]
+        [InlineData(57)]
         public void IsOdd_OddNumber_ReturnsTrue(int a)
         {
             bool result = _calculator.IsOdd(a);
 
             // Assert.That(result, Is.EqualTo(true));
-            Assert.IsTrue(result);
+            Assert.True(result);
         }
 
-        [Test]
+        [Fact]
         public void IsOddNumber_EvenNumber_ReturnsTrue()
         {
             bool result = _calculator.IsOdd(4);
-            Assert.IsFalse(result);
+            Assert.False(result);
         }
 
-        [Test]
-        [TestCase(10, ExpectedResult = false)]
-        [TestCase(11, ExpectedResult = true)]
-        public bool IsOdd_InputNumber_ReturnsTrueIfOdd(int a)
+        [Theory]
+        [InlineData(10, false)]
+        [InlineData(11, true)]
+        public void IsOdd_InputNumber_ReturnsTrueIfOdd(int a, bool expected)
         {
             bool result = _calculator.IsOdd(a);
 
-            return result;
+            Assert.Equal(expected, result);
         }
 
-        [Test]
-        [TestCase(5.4, 10.5)] //15.9
-        [TestCase(5.43, 10.53)] //15.93
-        [TestCase(5.49, 10.59)] //16.08
+        [Theory]
+        [InlineData(5.4, 10.5)] //15.9
+        [InlineData(5.43, 10.53)] //15.93
+        [InlineData(5.49, 10.59)] //16.08
         public void Add_InputTwoDoubles_ReturnsCorrectAddition(double a, double b)
         {
             // Arrange
@@ -66,25 +65,23 @@ namespace Sparky.Tests.NUnit
             var result = _calculator.AddDouble(a,b);
 
             // Assert
-            Assert.AreEqual(15.9, result, 1);
+            Assert.Equal(15.9, result, 0);
         }
 
-        [Test]
+        [Fact]
         public void GetOddNumbersRange_InputMinAndMax_ReturnsValidOddNumbersRange()
         {
             List<int> expected = new() { 1,3,5,7,9 };
 
             List<int> result = _calculator.GetOddNumbersRange(1, 10);
 
-            Assert.That(result, Is.EquivalentTo(expected));
-            // Assert.AreEqual(expected, result);
-            // Assert.Contains(7, result);
-            Assert.That(result, Does.Contain(7));
-            Assert.That(result, Is.Not.Empty);
-            Assert.That(result.Count, Is.EqualTo(5));
-            Assert.That(result, Has.No.Member(6));
-            Assert.That(result, Is.Ordered);
-            Assert.That(result, Is.Unique);
+            Assert.Equal(expected, result);
+            Assert.Contains(7, result);
+            Assert.NotEmpty(result);
+            Assert.Equal(5, result.Count);
+            Assert.DoesNotContain(6, result);
+            Assert.Equal(result.OrderBy(u => u), result);
+            //Assert.That(result, Is.Unique);
         }
     }
 }
