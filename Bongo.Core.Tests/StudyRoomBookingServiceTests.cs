@@ -1,6 +1,7 @@
 ﻿using Bongo.Core.Services;
 using Bongo.DataAccess.Repository.IRepository;
 using Bongo.Models.Model;
+using Bongo.Models.Model.VM;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -88,6 +89,59 @@ namespace Bongo.Core.Tests
             Assert.AreEqual(_request.Email, savedStudyRoomBooking.Email);
             Assert.AreEqual(_request.Date, savedStudyRoomBooking.Date);
             Assert.AreEqual(_availableRooms.First().Id, savedStudyRoomBooking.StudyRoomId);
+        }
+
+        [Test]
+        public void StudyRoomBookingResultCheck_InputRequest_ValuesMatchInResult()
+        {
+            StudyRoomBookingResult result = _bookingSvc.BookStudyRoom(_request);
+
+            Assert.NotNull(result);
+            Assert.AreEqual(_request.FirstName, result.FirstName);
+            Assert.AreEqual(_request.LastName, result.LastName);
+            Assert.AreEqual(_request.Email, result.Email);
+            Assert.AreEqual(_request.Date, result.Date);
+        }
+
+        [TestCase(true, ExpectedResult = StudyRoomBookingCode.Success)]
+        [TestCase(false, ExpectedResult = StudyRoomBookingCode.NoRoomAvailable)]
+        public StudyRoomBookingCode ResultCodeSuccess_RoomAvability_ReturnsSuccessResultCode(bool roomAvailability)
+        {
+            if (!roomAvailability)
+            {
+                _availableRooms.Clear();
+            }
+            return _bookingSvc.BookStudyRoom(_request).Code;
+        }
+
+        [TestCase(0, false)]
+        [TestCase(55, true)]
+        public void StudyRoomBooking_BookRoomWithAvailalbility_ReturnsBookingId
+            (int expectedBookingId, bool roomAvailability)
+        {
+            if (!roomAvailability)
+            {
+                _availableRooms.Clear();
+            }
+
+
+            _bookingRepoMock.Setup(x => x.Book(It.IsAny<StudyRoomBooking>()))
+                .Callback<StudyRoomBooking>(booking =>
+                {
+                    booking.BookingId = 55;
+                });
+
+            var result = _bookingSvc.BookStudyRoom(_request);
+            Assert.AreEqual(expectedBookingId, result.BookingId);
+        }
+
+        [Test]
+        public void BookNotInvoked_SaveBookingWithoutAvailableRoom_BookMethodNotInvoked()
+        {
+            _availableRooms.Clear();
+            var result = _bookingSvc.BookStudyRoom(_request);
+            _bookingRepoMock.Verify(x => x.Book(It.IsAny<StudyRoomBooking>()), Times.Never);
+
         }
     }
 }
